@@ -50,4 +50,15 @@ class ProductsControllerTest {
 
         assertEquals(3, result.getProductResponse().size());
     }
+
+    @Test
+    void negativeGetProductListByName() {
+        List<ProductResponseItem> productItemList = new ArrayList<ProductResponseItem>();
+
+        when(productResponseItemRepository.findByNameContainingIgnoreCase("NotFound")).thenReturn(Optional.of(productItemList));
+
+        ProductResponse result = testRestTemplate.getForObject("/productlist/NotFound", ProductResponse.class);
+
+        assertEquals(0, result.getProductResponse().size());
+    }
 }
