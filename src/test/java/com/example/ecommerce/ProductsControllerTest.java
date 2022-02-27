@@ -23,6 +23,9 @@ class ProductsControllerTest {
     @MockBean
     private ProductResponseItemRepository productResponseItemRepository;
 
+    @MockBean
+    private ProductDetailResponseRespository productDetailResponseRespository;
+
     @Test
     void positiveGetProductListByName() {
         List<ProductResponseItem> productItemList = new ArrayList<ProductResponseItem>();
@@ -61,4 +64,21 @@ class ProductsControllerTest {
 
         assertEquals(0, result.getProductResponse().size());
     }
+
+    @Test
+    void positiveGetProductsById() {
+        ProductDetailResponse productDetail = new ProductDetailResponse();
+        productDetail.setId(1);
+        productDetail.setPrice(95.0);
+        productDetail.setBrand("flowflex");
+        productDetail.setName("Flowflex 2:1");
+        productDetail.setSku("3438825297_TH-11111021111");
+
+        when(productDetailResponseRespository.findById(1)).thenReturn(Optional.of(productDetail));
+
+        ProductDetailResponse result = testRestTemplate.getForObject("/product/1", ProductDetailResponse.class);
+
+        assertEquals("SUCCESS", result.getStatus());
+    }
 }
+
