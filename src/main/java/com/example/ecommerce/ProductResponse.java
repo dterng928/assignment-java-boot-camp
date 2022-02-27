@@ -5,6 +5,10 @@ import java.util.List;
 public class ProductResponse {
 	private List<ProductResponseItem> productResponseItems;
 
+	public ProductResponse(){
+
+	}
+
 	public ProductResponse(List<ProductResponseItem> productResponseItems){
 		this.productResponseItems = productResponseItems;
 	}
