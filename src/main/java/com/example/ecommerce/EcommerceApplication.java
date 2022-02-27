@@ -39,6 +39,15 @@ public class EcommerceApplication {
 		productItemList.add(productItemC);
 
 		productResponseItemRepository.saveAll(productItemList);
+
+		ProductDetailResponse productDetail = new ProductDetailResponse();
+		productDetail.setId(1);
+		productDetail.setPrice(95.0);
+		productDetail.setBrand("flowflex");
+		productDetail.setName("Flowflex 2:1");
+		productDetail.setSku("3438825297_TH-11111021111");
+
+		productDetailResponseRespository.save(productDetail);
 	}
 
 	public static void main(String[] args) {
