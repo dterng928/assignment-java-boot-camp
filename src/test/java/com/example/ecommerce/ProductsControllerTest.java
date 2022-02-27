@@ -80,5 +80,15 @@ class ProductsControllerTest {
 
         assertEquals("SUCCESS", result.getStatus());
     }
+
+    @Test
+    void negativeGetProductsById() {
+        ProductDetailResponse productDetail = new ProductDetailResponse("ERROR");
+        when(productDetailResponseRespository.findById(1)).thenReturn(Optional.of(productDetail));
+
+        ProductDetailResponse result = testRestTemplate.getForObject("/product/2", ProductDetailResponse.class);
+
+        assertEquals("ERROR", result.getStatus());
+    }
 }
 
